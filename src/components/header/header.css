@@ -1,0 +1,30 @@
+
+@media (max-width: 600px) {
+.hero_wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+
+}
+
+.title-hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.portfolio {
+  position: absolute;
+  top: 5%;
+ letter-spacing: 10px;
+   font-family: 'velista';
+  font-size: 1rem;
+}
+
+}
