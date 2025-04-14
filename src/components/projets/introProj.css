@@ -1,0 +1,22 @@
+.introPro{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.my-iconoProj{
+  width: 60px;
+  height: 54px;
+}
+
+h2{
+   font-family: 'SankofaDisplay';
+   color:lightgrey;
+   letter-spacing: 50px;
+   
+   z-index: -1;
+   
+    
+}
