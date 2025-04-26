@@ -1,95 +1,103 @@
-import {  useRef, useEffect, useState } from "react";
-import "./accordion.css";
-import { motion,  useScroll, useTransform } from "motion/react";
-import AllProject from '../../Data/ProjectData';
+import { useEffect, useState, useRef } from "react";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+import Slider from "react-slick";
 
+import AllProject from "../../Data/ProjectData";
+import "./accordion.css";
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Portfolio = () => {
   const [isMobile, setIsMobile] = useState(false);
-  const ref = useRef(null);
-   // - Accordion state, we track which project is open
-   const [openProjectId, setOpenProjectId] = useState(null);
+  const containerRef = useRef(null);
 
-   // - Toggle project
-   const toggleProject = (id) => {
-     if (openProjectId === null) {
-       setOpenProjectId(id);
-     } else {
-       setOpenProjectId(null); 
-       
-     }
-   };
-
-   useEffect(() => {
+  useEffect(() => {
     const handleResize = () => {
-     
-      setIsMobile(window.innerWidth <= 767);
+      setIsMobile(window.innerWidth <= 767); // Mobile max width
     };
-    
-    handleResize();
+
+    handleResize(); // Initial check
     window.addEventListener("resize", handleResize);
-  
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // framer scroll horizontal
-  const { scrollYProgress } = useScroll({ target: ref });
-  const xTranslate = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [0, -window.innerWidth * AllProject.length]
-  );
+  useEffect(() => {
+    if (!isMobile) {
+      const sections = gsap.utils.toArray(".project-section");
+
+      sections.forEach((section) => {
+        ScrollTrigger.create({
+          trigger: section,
+          start: "top top",
+          end: "bottom top",
+          pin: true,
+          pinSpacing: false,
+          scrub: true,
+        });
+      });
+
+      const spacer = document.createElement("div");
+      spacer.style.height = "100vh";
+      spacer.classList.add("scroll-spacer");
+      containerRef.current.appendChild(spacer);
+
+      return () => {
+        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      };
+    }
+  }, [isMobile]);
+
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
 
   return (
-    <div className="section-project" ref={ref}>
-      <motion.div className="hori-section" style={{ x: isMobile ? 0 : xTranslate }} >
-        <div className="empty"/>
-        {AllProject.map((projects) => (
-          <div
-            className="accordion-item"
-            key={projects.id}
-            onClick={() => toggleProject(projects.id)}
-          >
-            <div className="accordion-header" style={{ display: "flex", justifyContent:"center"}}>
-              {/* icon open close right and left*/}
-               {projects.id % 2 !==0 &&(
-                  <span
-                    className= "circle"
-                    style ={{marginRight :"8px" , fontSize:"20px"}}>
-                    {openProjectId === projects.id ? "-" : "+"}
-                  </span>
-                )}
-               <div className="text">
-               <span>{projects.name}</span>
-               </div>
-             {projects.id % 2 ===0 &&(
-                <span
-                  className ="circle"
-                  style ={{marginLeft :"8px", fontSize:"20px"}}>
-                {openProjectId === projects.id ? "-" : "+"}
-                </span>
-             )}
-            </div>
-            {openProjectId === projects.id && (
-              <div className="accordion-content">
-                 <video
-                  className="video-project"
+    <div ref={containerRef} className="portfolio-wrapper">
+      {isMobile ? (
+        <div className="carousel-container">
+          <Slider {...sliderSettings}>
+            {AllProject.map((project) => (
+              <div key={project.id} className="carousel-item">
+                <video
+                  src={project.videos}
                   controls
                   autoPlay
-                  src={projects.videos} 
-                  alt={projects.name}
+                  muted
+                  playsInline
+                  className="full-width-video"
                 />
-                <p>{projects.description}</p>
-                <button onClick={() => window.open(projects.videos)}>Watch Video</button>
+                <h2>{project.name}</h2>
+                <p>{project.description}</p>
               </div>
-            )}     
-          </div>
-        ))}
-      </motion.div>
-      <section />
-      
+            ))}
+          </Slider>
+        </div>
+      ) : (
+        AllProject.map((project) => (
+          <section key={project.id} className="project-section">
+            <div className="project-inner">
+              <div className="project-header">
+              <h2>{project.name}</h2>
+              </div>
+              <video
+                className="full-width-video"
+                src={project.videos}
+                controls
+                autoPlay
+              />
+              <p className="description">{project.description}</p>
+            </div>
+          </section>
+        ))
+      )}
     </div>
   );
 };
