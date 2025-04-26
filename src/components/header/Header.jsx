@@ -7,6 +7,9 @@ import styled from 'styled-components';
 import Navbar from '../navbar/Navbar';
 import './header.css';
 import Butterfly from '/images/butterfly.png'
+import CreativeBallon from '/images/creative.png'
+import CreatBlack from '/images/c.png'
+import { OrbitControls } from '@react-three/drei';
 
 // Style du canvas
 const StyledCanvas = styled(Canvas)`
@@ -41,28 +44,30 @@ const PortfolioText = styled.h2`
 
 const TextWebDeveloper = styled.h1`
   ${textStyle}
-  top: 50%; 
+  top: 60%; 
   left: 70%;
   transform: translate(-50%, -50%);
   color: rgb(180, 180, 174);
-  font-size: 8rem;
+  font-size: 5rem;
 `;
 
 
 const CreativeText = styled.p`
   ${textStyle}
-  top: 40%;
-  left: 28%;
+  font-family: 'SankofaDisplay';
+  top: 50%;
+  left: 70%;
   transform: translate(-50%, -50%);
-  color: rgb(6, 6, 6);
-  font-size: 10rem;
+  font-size: 8rem;
+  color: rgb(244, 244, 244);
+  
 `;
 
 // Cube (dans la scène 3D)
 const Cube = () => {
   return (
-    <mesh position={[0, 0.4, 1]} scale={[1, 1, 1]}>
-      <boxGeometry args={[9, 3.01, 2]} />
+    <mesh position={[0, -0.2, 1]} scale={[1, 1, 1]}>
+      <boxGeometry args={[6, 2, 2]} />
       <MeshTransmissionMaterial
         thickness={0.1}
         transmission={0.8}
@@ -92,6 +97,7 @@ const Cube = () => {
        <Environment preset="city" intensity={0.4} />
       <Cube />
       <CarModel ref={modelCarRef} scale={[1, 1, 1]}  position={[-4, -2, -5]} />
+
     </Suspense>
 
 
@@ -102,9 +108,9 @@ const Cube = () => {
 const CanvaContainer = () => {
 
   return (
+    <div className="backSection"> 
     <div className="canva-section">
       <Navbar/>
-     
       <StyledCanvas>
         <Scene />
         <ambientLight intensity={0.2} color={"rgb(108, 108, 108)"} />
@@ -117,15 +123,17 @@ const CanvaContainer = () => {
       </StyledCanvas>
     
       <div className="title-hero">
-        <div className="butterfly">
-          <img src={Butterfly}  alt="papillon" />;
-        </div>
+        {/* <div className="butterfly">
+          <img src={CreatBlack} loading="lazy"  alt="papillon" />
+        </div> */}
           <TextWebDeveloper>Developer</TextWebDeveloper>
           <CreativeText>Creative</CreativeText>
+         
+     
           {/* <PortfolioText>PORTFOLIO</PortfolioText> */}
       </div>
     </div>
-
+    </div>
 
   );
 };
