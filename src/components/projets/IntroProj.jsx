@@ -1,10 +1,13 @@
-import React,{useEffect,useRef} from 'react';
+import React,{useEffect,useRef } from 'react';
+import  { Suspense } from "react";
 import './introProj.css';
 import MyIconoProj from '../../assets/iconoProj.svg';
 import Crown from '/images/crown-hh.gif';
 import styled from 'styled-components';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Shape from './Shape'
+import { Canvas } from "@react-three/fiber";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -47,13 +50,6 @@ const TitleProj = styled.h1`
 `;
 
 
-const Textbkg =styled.p`
-   font-family: 'pwgrafitti';
-    font-size: 6rem;
-    color:rgb(3, 3, 3);
-
-`
-
 const IntroProj = () => {
   const BckgroundSection = useRef(null);
   const bgShapeRef = useRef(null);
@@ -81,8 +77,10 @@ const IntroProj = () => {
   
   return (
     <div className="introPro" ref={BckgroundSection}>
+     
       <div className= "bckAnim"ref={bgShapeRef}></div>
-        <div className="contentSection">
+      <div className="contentSection"> 
+      
         <div className="contentTitle">
           <SubTitle>Knowledge</SubTitle>
           <TitleProj>
@@ -99,15 +97,32 @@ const IntroProj = () => {
        I present reflect mostly my technical 
        skills.
        <span className="crown">
-          <img src={Crown} className="crown" />
+          <img src={Crown} className="crown" alt="crowntest" />
         </span> 
         <br/> 
+        <br/> 
+        <br/> 
         </TextProj>
+        <div className="bckStack">
+          <Canvas>
+            <Suspense fallback={<span>Loading...</span>}>
+             <Shape/>
+            </Suspense>
+          </Canvas>
+        </div>
+       
+        <span className="skills-beg">
+          <span>FRONTEND</span> 
+            HTML<br/> 
+            CSS<br/> 
+            JAVASCRIPT<br/>
+            REACT<br/>
+            GSAP<br/> 
           
-        
-        <Textbkg>Frontend</Textbkg>
-          <span className="skills-beg">HTML<br/> CSS<br/> JavaScript<br/>  SASS<br/>  Bootstrap<br/> GSAP<br/> 
-          <Textbkg >Backend</Textbkg> Node.js<br/> Java<br/></span>
+          <span>BACKEND</span>
+            NODE.js<br/> 
+            Java<br/>
+        </span>
       </div>
     </div>
   
