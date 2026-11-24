@@ -1,58 +1,101 @@
+
 import React, { useEffect, useState } from 'react';
 import './navbar.css';
-import menu from '/public/images/menu.svg';
-import close from '/public/images/close-button.svg';
 
 const Navbar = () => {
+
     const [toggle, setToggle] = useState(false);
 
-    // Empêcher le défilement quand le menu mobile est ouvert
+    
     useEffect(() => {
-        if (toggle) {
-            document.body.classList.add('inactive-scroll');
-        } else {
-            document.body.classList.remove('inactive-scroll');
-        }
-    }, [toggle]);
+
+        const handleEscape = (event) => {
+            if (event.key === 'Escape') {
+                setToggle(false);
+            }
+        };
+
+        window.addEventListener('keydown', handleEscape);
+
+        return () => {
+            window.removeEventListener('keydown', handleEscape);
+        };
+
+    }, []);
 
     return (
-        <div className="navWrapper">
-            {/* Logo desktop */}
-            {/* <div className="logo-desktop">
-                <img src="images/logo.svg" alt="logo" className="logo" />
-            </div> */}
-            <nav className="navigation">
-                {/* Menu Desktop
-                <div className="nav-section">
-                    <ul className="list-section">
-                        <p>Home</p>
-                        <p>Projects</p>
-                        <p>About me</p>
-                        <p>Contact</p>
-                    </ul>
-                </div> */}
 
-                {/* Menu mobile */}
-                <div className="mobile-menu">
-                    <div className="hamburger">
-                        <img 
-                            src={toggle ? close : menu} 
-                            alt="menu icon"
-                            onClick={() => setToggle(!toggle)} 
-                        />
-                    </div>
-                    <div className={`mobile-menu ${toggle ? "open" : "hidden"}`}>
-                        <ul>
-                            <li>Home</li>
-                            <li>Projects</li>
-                            <li>About me</li>
-                            <li>Contact</li>
-                        </ul>
-                    </div>
-                </div>       
+        <div className="navWrapper">
+
+            {/* LOGO */}
+
+            <a href="#home" className="logo-desktop">
+                AP.
+            </a>
+
+            {/* MENU  */}
+
+            <nav className="navigation">
+
+                <button
+                    className="hamburger"
+                    onClick={() => setToggle(!toggle)}
+                    aria-label={toggle ? 'Close menu' : 'Open menu'}
+                    aria-expanded={toggle}
+                    aria-controls="nav-panel"
+                >
+
+                    <img
+                        src={toggle
+                            ? '/images/close-button.svg'
+                            : '/images/menu.svg'
+                        }
+                        alt=""
+                    />
+
+                </button>
+
+                <div
+                    id="nav-panel"
+                    className={`nav-panel ${toggle ? 'open' : ''}`}
+                    inert={!toggle ? true : undefined}
+                >
+
+                    <ul>
+
+                        <li>
+                            <a href="#home" onClick={() => setToggle(false)}>
+                                Home
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#about" onClick={() => setToggle(false)}>
+                                About
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#projects" onClick={() => setToggle(false)}>
+                                Projects
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#contact" onClick={() => setToggle(false)}>
+                                Contact
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
             </nav>
+
         </div>
+
     );
-}
+};
 
 export default Navbar;
