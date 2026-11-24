@@ -54,24 +54,35 @@ const IntroProj = () => {
   const BckgroundSection = useRef(null);
   const bgShapeRef = useRef(null);
 
+useEffect(() => {
+ if (!bgShapeRef.current || !BckgroundSection.current) return;
 
-  useEffect(() => {
-    if (!bgShapeRef.current || !BckgroundSection.current) return;
-  
+  const ctx = gsap.context(() => {
     gsap.fromTo(
       bgShapeRef.current,
-      { clipPath: 'circle(10% at 50% 50%)' },
       {
-        clipPath: 'circle(150% at 50% 50%)',
+        clipPath: "circle(10% at 50% 50%)",
+      },
+      {
+        clipPath: "circle(100% at 50% 50%)",
+        ease: "none",
         scrollTrigger: {
           trigger: BckgroundSection.current,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: 1,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 0.5,
+          markers: false,
         },
       }
     );
-  }, []);
+  }, BckgroundSection.current);
+
+  ScrollTrigger.refresh();
+
+  return () => ctx.revert();
+
+}, []);
+
 
 
   
@@ -93,22 +104,19 @@ const IntroProj = () => {
       <TextProj>
        My journey through the digital world began with a focus on technical foundations with frontend then backend. 
        <br/>I studied Product design in the bootcamp THE DESIGN CREW to better understand user experience.
-       <br/> Graphic design has been a part of my path from the start, but the projects 
+       <br/>Graphic design has been a part of my path from the start, but the projects 
        I present reflect mostly my technical 
-       skills.
-       <span className="crown">
-          <img src={Crown} className="crown" alt="crowntest" />
-        </span> 
+       skills. 
         <br/> 
         <br/> 
-        <br/> 
+      
         </TextProj>
         <div className="bckStack">
           <Canvas>
             <Suspense fallback={<span>Loading...</span>}>
              <Shape/>
             </Suspense>
-          </Canvas>
+         </Canvas> 
         </div>
        
         <span className="skills-beg">
@@ -121,7 +129,10 @@ const IntroProj = () => {
           
           <span>BACKEND</span>
             NODE.js<br/> 
-            Java<br/>
+            JAVA EE<br/>
+          
+        
+          
         </span>
       </div>
     </div>

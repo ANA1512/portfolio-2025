@@ -1,3 +1,4 @@
+
 import { useEffect, useState, useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
@@ -12,24 +13,46 @@ import "slick-carousel/slick/slick-theme.css";
 gsap.registerPlugin(ScrollTrigger);
 
 const Portfolio = () => {
-  const [isMobile, setIsMobile] = useState(false);
+
+  const [isMobile, setIsMobile] = useState(
+    () => window.innerWidth <= 767
+  );
+
   const containerRef = useRef(null);
 
+  // RESPONSIVE MOBILE
+
   useEffect(() => {
+
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 767); // Mobile max width
+      setIsMobile(window.innerWidth <= 767);
     };
 
-    handleResize(); // Initial check
+    handleResize();
+
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+
   }, []);
 
+
+  // ANIMATION GSAP - DESKTOP
+
   useEffect(() => {
-    if (!isMobile) {
+
+    if (isMobile || !containerRef.current) return;
+
+    const container = containerRef.current;
+
+    const ctx = gsap.context(() => {
+
       const sections = gsap.utils.toArray(".project-section");
 
       sections.forEach((section) => {
+
         ScrollTrigger.create({
           trigger: section,
           start: "top top",
@@ -37,19 +60,24 @@ const Portfolio = () => {
           pin: true,
           pinSpacing: false,
           scrub: true,
+          invalidateOnRefresh: true,
+          markers: false,
         });
+
       });
 
-      const spacer = document.createElement("div");
-      spacer.style.height = "100vh";
-      spacer.classList.add("scroll-spacer");
-      containerRef.current.appendChild(spacer);
+    }, container);
 
-      return () => {
-        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-      };
-    }
+    ScrollTrigger.refresh();
+
+    return () => {
+      ctx.revert();
+    };
+
   }, [isMobile]);
+
+
+  // CONFIGURATION CAROUSEL MOBILE
 
   const sliderSettings = {
     dots: true,
@@ -59,46 +87,94 @@ const Portfolio = () => {
     slidesToScroll: 1,
   };
 
+
   return (
-    <div ref={containerRef} className="portfolio-wrapper">
+
+    <div
+      ref={containerRef}
+      className="portfolio-wrapper"
+    >
+
       {isMobile ? (
+
+        // VERSION MOBILE
+
         <div className="carousel-container">
+
           <Slider {...sliderSettings}>
+
             {AllProject.map((project) => (
-              <div key={project.id} className="carousel-item">
+
+              <div
+                key={project.id}
+                className="carousel-item"
+              >
+
                 <video
                   src={project.videos}
                   controls
-                  autoPlay
                   muted
                   playsInline
-                  className="full-width-video"
+                  preload="metadata"
                 />
+
                 <h2>{project.name}</h2>
+
                 <p>{project.description}</p>
+
               </div>
+
             ))}
+
           </Slider>
+
         </div>
+
       ) : (
+
+        // VERSION DESKTOP
+
         AllProject.map((project) => (
-          <section key={project.id} className="project-section">
+
+          <section
+            key={project.id}
+            className="project-section"
+          >
+
             <div className="project-inner">
+
               <div className="project-header">
-              <h2>{project.name}</h2>
+
+                <h2>{project.name}</h2>
+
               </div>
+
               <video
                 className="full-width-video"
                 src={project.videos}
                 controls
-                autoPlay
+                playsInline
+                preload="metadata"
               />
-              <p className="description">{project.description}</p>
+
+              <p className="description">
+                {project.description}
+              </p>
+
             </div>
+
           </section>
+
         ))
+
       )}
+
+      {/* SPACER DESKTOP GÉRÉ PAR REACT */}
+
+      {!isMobile && <div className="scroll-spacer" />}
+
     </div>
+
   );
 };
 

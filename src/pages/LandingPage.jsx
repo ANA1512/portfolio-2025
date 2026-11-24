@@ -1,15 +1,21 @@
 import React from 'react'
-import About from '../components/about/About'
 import Hero from '../components/header/Header'
-import Accordion from '../components/accordion/Accordion'
+import IntroProjects  from '../components/projets/IntroProj'
+import Projects from '../components/projets/Accordion'
+import About from '../components/about/About'
+import GlobalStyle from '../style/Globalstyle';
+
 
 const LandingPage = () => {
   return (
     <> 
-      <Hero/>
-      <Accordion/> 
-       <About/> 
-     
+      <GlobalStyle/>
+      <Hero/> 
+      <About/>
+      <IntroProjects/> 
+      <Projects/>
+      
+  
     </>
   )
 }

@@ -1,60 +1,55 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
-  /* Importation des polices Google */
-  @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;700&family=Inter:wght@400;500;700&family=Space+Grotesk:wght@300;400;500&display=swap');
 
-  /* Définir les polices globales */
-  body {
-    font-family: 'Inter', sans-serif;  /* Polices principales */
-    font-weight:400;
+  /* Font Face personnalisées */
+  @font-face {
+    font-family: 'Velista';
+    src: url('/fonts/velista.ttf') format('truetype');
   }
 
   @font-face {
-  font-family: 'velista';
-  src: url('/fonts/velista.ttf') format('truetype');
- 
-}
-   @font-face {
-  font-family: 'Cormorant';
-  src: url('/fonts/Cormorant.ttf') format('truetype');
- 
-}
-
-    @font-face {
-  font-family: 'Modist';
-  src: url('/fonts/Modist.ttf') format('truetype');
- 
-}
-
-  h1{
-   font-family: 'Cormorant';
-    font-weight:300;
-    font-size: 3rem;
+    font-family: 'SankofaDisplay';
+    src: url('/fonts/SankofaDisplay-Regular.ttf') format('truetype');
   }
 
-  p{
-    font-family: 'space grotesk', sans-serif; 
+   @font-face {
+    font-family: 'Bubble';
+    src: url('/fonts/Bubble.otf') format('truetype');
+  }
+
+   @font-face {
+    font-family: 'pwgrafitti';
+    src: url('/fonts/Wholecar.otf') format('truetype');
+  }
+
+  /* Styles globaux */
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: #fff;
+    color: #000;
+  }
+
+  p {
+    font-family: 'Space Grotesk', sans-serif;
     font-weight: 400;
     font-size: 1rem;
-   
-   }
-
-  h2{
-   font-family: 'SankofaDisplay', serif;
-   font-size: 2.5rem;
+    line-height: 1.6;
   }
 
-  h3{
-   font-size: 2rem;
-
+  h2 {
+    font-family: 'SankofaDisplay', serif;
+    font-size: 2.5rem;
   }
-   span{
-       font-family: 'Cormorant';
-       font-size: 1.5rem;
-       text-transform: uppercase;
-       font-weight:300;
-   }
+
+  h3 {
+    font-size: 2rem;
+    font-weight: 500;
+  }
 `;
 
 export default GlobalStyle;

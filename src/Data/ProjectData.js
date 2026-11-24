@@ -1,75 +1,71 @@
-
-
+//All projects
 const ProjectData = [
-
       {
         id: 1,
         name: "Orinoco",
         subtitle: "javascript",
-        description : "projet javascript ecom rihrehureghurehugrehgiuerghuerghreughreug",
+        description : "",
         image: '/images/orinoco-new.png',
-        videos: '/videos/orinoco.mp4'
+        videos: '/videos/ori-vf.mp4'
       },
 
       {
         id: 2,
         name: "Piquante",
         subtitle: "Node.js",
-        description :"Projet node js",
+        description :"",
         image: '/images/piquante-new.png',
-        videos: '/videos/hottakes.mp4'
+        videos: '/videos/node.mp4'
       },
 
       {
       id: 3, 
       name: "Kasa",
       subtitle: "React",
-      description :"projet react",
+      description :"",
       image: '/images/kasa-new.png',
-      videos: '/videos/react.mp4'
+      videos: '/videos/kasareact.mp4'
       },
       {
         id: 4, 
         name: "Fastcar",
         subtitle: "Java",
-        description :"projet SEO",
+        description :"",
         image: '/images/agence-new.png',
-        videos: '/videos/agence-chouette.mp4'
+        videos: '/videos/fastcar.mp4'
       },
 
       {
         id: 5, 
         name: "La chouette agence",
         subtitle: "SEO",
-        description :"projet SEO",
+        description :"",
         image: '/images/agence-new.png',
-        videos: '/videos/agence-chouette.mp4'
+        videos: '/videos/seoagency-vf.mp4'
       },
       {
         id: 6, 
         name: "Graphisme",
       
-        description :"projet BD",
+        description :"",
         image: '/images/graphisme.png',
-        videos: '/videos/agence-chouette.mp4'
+        videos: '/videos/graphisme.mp4'
       },
 
       {
         id: 7, 
         name: "Product-design",
-      
-        description :"projet design",
+        description :"",
         image: '/images/graphisme.png',
-        videos: '/videos/agence-chouette.mp4'
+        videos: '/videos/pd-teaser.mp4'
       },
 
       {
         id: 8, 
-        name: "Next",
-     
-        description :"projet design",
+        name: "Next projects",
+        description :"",
         image: '/images/graphisme.png',
-        videos: '/videos/agence-chouette.mp4'
+        videos: '/videos/next-teaser.mp4'
       },
 
 ]

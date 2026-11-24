@@ -8,8 +8,21 @@
 
 }
 
+body {
+ 
+   background-color: rgb(255, 255, 255);
+}
 
-
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  /*background-image: url("/textures/cartographer.png");*/
+  background-repeat: repeat;
+  opacity: 0.4; 
+  pointer-events: none;
+  z-index: 0;
+}
 
 
 

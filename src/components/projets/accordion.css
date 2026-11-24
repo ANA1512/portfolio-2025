@@ -1,128 +1,139 @@
-/*Mobile*/
-
-@media (max-width: 767px) {
-  
-  .empty{
-    display:none;
-  }
-
-  .accordion-header {
-    font-size: 1.2rem;
-    font-weight: bold;
-    cursor: pointer;
-    padding: 15px;
-    background-color: #201F1F;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .accordion-item {
-    border-bottom: 2px solid #ccc;
-    color: white;
-    background-color: grey;
-    width: 100%;
-  }
-
-  .accordion-content {
-    transition: max-height 0.4s ease-in-out;
-  }
-
-  .video-project{
-
-    width:100%;
-
-  }
-
-  button {
-    background: black;
-    color: white;
-    padding: 10px;
-    margin-top: 10px;
-    border: none;
-    cursor: pointer;
-  }
-
-  .circle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 35px;
-    height: 35px;
-    line-height: 1;
-    border: 1px solid white;
-    border-radius: 100%;
-  }
- 
-  
-}
-/*Tablet*/
-
-
-/* Format Desktop */
-@media (min-width: 1025px) {
-
-/*container size bigger*/
-.section-project{
-    height: 600vh;
-    position: relative;
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: sans-serif;
+  background-color: #0d0d0d;
+  color: white;
 }
 
-.hori-section {
-  position: sticky;
-  top: 0;
-  display: flex;
-  height: 100vh;
-  width: max-content;
-    overflow-x: auto;
+/* ===== WRAPPER ===== */
+.portfolio-wrapper {
+  width: 100%;
+  overflow-x: hidden;
 }
 
-.empty{
-  min-width: 100vw;
-  background-color: pink;
-
-}
-
-.accordion-header{
-  background-color:blue;
-}
-
-  .accordion-item {
-  height: 100vh;
+/* ===== SECTION PIN DESKTOP ===== */
+.project-section {
   width: 100vw;
-  overflow: hidden;
+  min-height: 100vh; 
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 100px;
-  background :yellow;
-    
+  background-image: url(/textures/stardust.png);
+  background-position: center;
+  background-color:rgb(0, 0, 0);
+  background-blend-mode:normal;
+  box-sizing: border-box;
+  padding: 0;
+  overflow:hidden;
+}
+
+.project-inner {
+  width: 100vw;
+  max-width: 1200px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+
+.project-inner h2 {
+  font-size: 4rem;
+  padding:20px;
+  letter-spacing: 10px;
+
+}
+
+.full-width-video {
+  
+  height: auto;
+  max-height: 60vh;
+  object-fit: contain;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.project-inner p {
+  font-size: 1.4rem;
+  max-width: 800px;
+  margin-bottom: 20px;
+  color: white;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+/* ===== SPACER FOR PINNING ===== */
+.scroll-spacer {
+  height: 100vh;
+  background-color: #0d0d0d;
+}
+
+
+.project-header{
+  height: 50%;
+}
+
+.scroll-spacer {
+  height: 100vh;
+}
+
+/* ===== MOBILE VIEW ===== */
+@media (max-width: 767px) {
+  .carousel-container {
+    width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
   }
 
+  .carousel-item {
+    width: 100%;
+    padding: 20px;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #0d0d0d;
+    box-sizing: border-box;
+    height: auto !important;
+  }
 
-.accordion-item:nth-child(1) {
-  background: linear-gradient(to right, #12071f, #210b3a);
-}
+  .carousel-item video {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 20px;
+    max-height: none;
+  }
 
+  .carousel-item h2 {
+    font-size: 2.2rem;
+    margin-top: 10px;
+    text-align: center;
+  }
 
-.accordion-item img {
-  max-width: 80%;
-  height: auto;
-  border-radius: 8px;
-}
+  .carousel-item p {
+    font-size: 1.6rem;
+    max-width: 90%;
+    margin-top: 10px;
+    text-align: center;
+  }
 
-.accordion-item button {
-  margin-top: 8px;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 4px;
-  background-color: #007bff;
-  color: white;
-  cursor: pointer;
-}
+ 
+  .slick-slide {
+    display: flex !important;
+    align-items: stretch;
+    height: auto !important;
+  }
 
-.accordion-item button:hover {
-  background-color: #0056b3;
-}
-
+  .slick-track {
+    display: flex !important;
+    flex-direction: column;
+    height: auto !important;
+  }
 }

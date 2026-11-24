@@ -6,12 +6,21 @@ License: CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
 Source: https://sketchfab.com/3d-models/1987-buick-grand-national-regal-gnx-4572494cd9cd432e8da50efb5c7a47c9
 Title: 1987 Buick Grand National Regal GNX
 */
+import React, { useEffect } from 'react';
+import { useGLTF } from '@react-three/drei';
 
-import React from 'react'
-import { useGLTF } from '@react-three/drei'
+const CarModel = (props) => {
+  const { nodes, materials } = useGLTF('/car-gnx.glb');
 
-const CarModel =(props)=> {
-  const { nodes, materials } = useGLTF('/car-gnx.glb')
+  useEffect(() => {
+    const carrosserie = materials.Body;
+
+    carrosserie.color.set('#080808');
+    carrosserie.metalness = 0.65;
+    carrosserie.roughness = 0.35;
+    carrosserie.envMapIntensity = 0.4;
+  }, [materials]);
+
   return (
     <group {...props} dispose={null}>
       <group rotation={[-Math.PI / 2, 0, 0]}>
